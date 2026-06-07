@@ -1,196 +1,29 @@
 import {
   Phone, Car, Sparkles, Shield, Star, Clock, MapPin, CheckCircle,
   Droplets, SprayCan, Armchair, CircleDot, Truck, Wrench,
-  Menu, X, Globe
+  Menu, X, Globe, ChevronDown
 } from 'lucide-react'
-import { useState } from 'react'
-
-const translations = {
-  es: {
-    nav: {
-      servicios: 'Servicios',
-      paquetes: 'Paquetes',
-      nosotros: 'Nosotros',
-      galeria: 'Galeria',
-      testimonios: 'Testimonios',
-      contacto: 'Contacto',
-    },
-    hero: {
-      subtitle: 'Detallado Profesional a Domicilio',
-      description: 'Llevamos nuestros servicios directamente a tu hogar o trabajo para que tu vehiculo luzca impecable, protegido y como nuevo.',
-      cta1: 'Reservar Ahora',
-      cta2: 'Llamar Ahora',
-    },
-    servicios: {
-      title1: 'Nuestros',
-      title2: 'Servicios',
-      subtitle: 'Ofrecemos una amplia gama de servicios de detallado profesional para mantener tu vehiculo en perfectas condiciones.',
-      items: [
-        'Lavado Exterior Profesional',
-        'Detallado Interior Completo',
-        'Paquete Completo Interior y Exterior',
-        'Limpieza de Asientos y Alfombras',
-        'Proteccion con Cera Premium',
-        'Proteccion Ceramica en Spray',
-        'Limpieza de Compartimiento del Motor',
-        'Detallado para Vans y Flotas Comerciales',
-      ],
-    },
-    paquetes: {
-      title1: 'Nuestros',
-      title2: 'Paquetes',
-      subtitle: 'Elige el paquete que mejor se adapte a tus necesidades.',
-      desde: 'Desde',
-      reservar: 'Reservar',
-      items: ['Paquete Basico', 'Paquete Interior', 'Paquete Completo', 'Paquete Premium'],
-    },
-    porQue: {
-      title1: 'Por Que',
-      title2: 'Elegirnos',
-      items: [
-        'Servicio movil a domicilio',
-        'Productos profesionales de alta calidad',
-        'Atencion al detalle',
-        'Puntualidad y confiabilidad',
-        'Resultados garantizados',
-        'Servicio en Houston, Katy, Fulshear, Richmond, Rosenberg y alrededores',
-      ],
-    },
-    nosotros: {
-      title1: 'Sobre',
-      title2: 'Nosotros',
-      text: 'En Apex Detailing nos especializamos en ofrecer servicios profesionales de detallado movil con atencion personalizada y resultados excepcionales. Nuestro objetivo es que cada vehiculo recupere su mejor apariencia y proteccion.',
-    },
-    galeria: {
-      title1: 'Nuestra',
-      title2: 'Galeria',
-    },
-    testimonios: {
-      title1: 'Lo Que Dicen Nuestros',
-      title2: 'Clientes',
-      items: [
-        'Excelente servicio y atencion. Mi vehiculo quedo como nuevo.',
-        'Profesionales, puntuales y muy detallistas.',
-        'Definitivamente volvere a contratar sus servicios.',
-      ],
-    },
-    contacto: {
-      title1: 'Solicita Tu',
-      title2: 'Cotizacion',
-      nombre: 'Nombre',
-      telefono: 'Telefono',
-      vehiculo: 'Tipo de vehiculo',
-      servicio: 'Servicio solicitado',
-      mensaje: 'Mensaje',
-      submit: 'Solicitar Cotizacion',
-      reservar: 'Reservar Servicio',
-    },
-    footer: {
-      subtitle: 'Detallado Profesional a Domicilio',
-      copyright: 'Todos los derechos reservados.',
-    },
-    floating: {
-      llamar: 'Llamar',
-      reservar: 'Reservar',
-    },
-  },
-  en: {
-    nav: {
-      servicios: 'Services',
-      paquetes: 'Packages',
-      nosotros: 'About Us',
-      galeria: 'Gallery',
-      testimonios: 'Testimonials',
-      contacto: 'Contact',
-    },
-    hero: {
-      subtitle: 'Professional Mobile Detailing',
-      description: 'We bring our services directly to your home or workplace so your vehicle looks impeccable, protected, and like new.',
-      cta1: 'Book Now',
-      cta2: 'Call Now',
-    },
-    servicios: {
-      title1: 'Our',
-      title2: 'Services',
-      subtitle: 'We offer a wide range of professional detailing services to keep your vehicle in perfect condition.',
-      items: [
-        'Professional Exterior Wash',
-        'Full Interior Detailing',
-        'Complete Interior & Exterior Package',
-        'Seat & Carpet Cleaning',
-        'Premium Wax Protection',
-        'Ceramic Spray Protection',
-        'Engine Bay Cleaning',
-        'Van & Commercial Fleet Detailing',
-      ],
-    },
-    paquetes: {
-      title1: 'Our',
-      title2: 'Packages',
-      subtitle: 'Choose the package that best fits your needs.',
-      desde: 'Starting at',
-      reservar: 'Book',
-      items: ['Basic Package', 'Interior Package', 'Complete Package', 'Premium Package'],
-    },
-    porQue: {
-      title1: 'Why',
-      title2: 'Choose Us',
-      items: [
-        'Mobile service at your doorstep',
-        'High-quality professional products',
-        'Attention to detail',
-        'Punctuality and reliability',
-        'Guaranteed results',
-        'Serving Houston, Katy, Fulshear, Richmond, Rosenberg and surrounding areas',
-      ],
-    },
-    nosotros: {
-      title1: 'About',
-      title2: 'Us',
-      text: 'At Apex Detailing we specialize in offering professional mobile detailing services with personalized attention and exceptional results. Our goal is for every vehicle to regain its best appearance and protection.',
-    },
-    galeria: {
-      title1: 'Our',
-      title2: 'Gallery',
-    },
-    testimonios: {
-      title1: 'What Our',
-      title2: 'Clients Say',
-      items: [
-        'Excellent service and attention. My vehicle looked brand new.',
-        'Professional, punctual, and very detail-oriented.',
-        'I will definitely hire their services again.',
-      ],
-    },
-    contacto: {
-      title1: 'Request Your',
-      title2: 'Quote',
-      nombre: 'Name',
-      telefono: 'Phone',
-      vehiculo: 'Vehicle type',
-      servicio: 'Requested service',
-      mensaje: 'Message',
-      submit: 'Request Quote',
-      reservar: 'Book Service',
-    },
-    footer: {
-      subtitle: 'Professional Mobile Detailing',
-      copyright: 'All rights reserved.',
-    },
-    floating: {
-      llamar: 'Call',
-      reservar: 'Book',
-    },
-  },
-}
-
-type Lang = 'es' | 'en'
+import { useState, useRef, useEffect } from 'react'
+import { languages, getTranslation } from './translations'
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [lang, setLang] = useState<Lang>('es')
+  const [lang, setLang] = useState('es')
+  const [langMenuOpen, setLangMenuOpen] = useState(false)
+  const langRef = useRef<HTMLDivElement>(null)
 
-  const t = translations[lang]
+  const t = getTranslation(lang)
+
+  // Close language dropdown when clicking outside
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+        setLangMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
 
   const navLinks = [
     { href: '#servicios', label: t.nav.servicios },
@@ -201,23 +34,42 @@ function App() {
     { href: '#contacto', label: t.nav.contacto },
   ]
 
-  const toggleLang = () => setLang(lang === 'es' ? 'en' : 'es')
+  // RTL languages
+  const rtlLangs = ['ar', 'he', 'ur', 'fa']
+  const isRTL = rtlLangs.includes(lang)
 
   return (
-    <div className="bg-black text-white min-h-screen font-sans">
+    <div className="bg-black text-white min-h-screen font-sans" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* HEADER */}
       <header className="sticky top-0 z-50 bg-black/95 backdrop-blur border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <a href="#" className="text-xl font-bold tracking-wider">APEX <span className="text-blue-brand">DETAILING</span></a>
-            <button
-              onClick={toggleLang}
-              className="flex items-center gap-1 text-xs font-semibold border border-gray-600 hover:border-blue-brand rounded-full px-2.5 py-1 text-gray-300 hover:text-white transition"
-              title={lang === 'es' ? 'Switch to English' : 'Cambiar a Español'}
-            >
-              <Globe size={14} />
-              {lang === 'es' ? 'EN' : 'ES'}
-            </button>
+            {/* Language Selector */}
+            <div className="relative" ref={langRef}>
+              <button
+                onClick={() => setLangMenuOpen(!langMenuOpen)}
+                className="flex items-center gap-1 text-xs font-semibold border border-gray-600 hover:border-blue-brand rounded-full px-2.5 py-1 text-gray-300 hover:text-white transition"
+              >
+                <Globe size={14} />
+                <span>{languages[lang]?.nativeName || lang}</span>
+                <ChevronDown size={12} className={`transition-transform ${langMenuOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {langMenuOpen && (
+                <div className="absolute top-full mt-2 left-0 bg-gray-900 border border-gray-700 rounded-xl shadow-2xl py-2 w-56 max-h-80 overflow-y-auto z-[100]">
+                  {Object.entries(languages).map(([code, { nativeName, name }]) => (
+                    <button
+                      key={code}
+                      onClick={() => { setLang(code); setLangMenuOpen(false) }}
+                      className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-800 transition flex justify-between items-center ${lang === code ? 'text-blue-brand font-semibold' : 'text-gray-300'}`}
+                    >
+                      <span>{nativeName}</span>
+                      <span className="text-gray-500 text-xs">{name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
           <nav className="hidden md:flex gap-6 text-sm text-gray-300">
             {navLinks.map(l => <a key={l.href} href={l.href} className="hover:text-white transition">{l.label}</a>)}
